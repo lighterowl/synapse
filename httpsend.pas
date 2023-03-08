@@ -81,8 +81,9 @@ type
 
   {:abstract(Implementation of HTTP protocol.)}
   THTTPSend = class(TSynaClient)
-  protected
+  public
     FSock: TTCPBlockSocket;
+  protected
     FTransferEncoding: TTransferEncoding;
     FAliveHost: string;
     FAlivePort: string;
@@ -288,10 +289,10 @@ begin
   FProxyPass := '';
   FAliveHost := '';
   FAlivePort := '';
-  FProtocol := '1.0';
+  FProtocol := '1.1';
   FKeepAlive := True;
   FStatus100 := False;
-  FUserAgent := 'Mozilla/4.0 (compatible; Synapse)';
+  FUserAgent := 'Mozilla/4.0 (compatible; transmission-remote-gui)';
   FDownloadSize := 0;
   FUploadSize := 0;
   FAddPortNumberToHost := true;
@@ -469,7 +470,7 @@ begin
   else
     FHeaders.Insert(0, pp + 'Connection: close');
   { set target servers/proxy, authorizations, etc... }
-  if User <> '' then
+  if (User <> '') or (Pass <> '') then
     FHeaders.Insert(0, 'Authorization: Basic ' + EncodeBase64(User + ':' + Pass));
   if UsingProxy and (FProxyUser <> '') then
     FHeaders.Insert(0, 'Proxy-Authorization: Basic ' +

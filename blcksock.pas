@@ -240,8 +240,6 @@ type
   {:Specify requested SSL/TLS version for secure connection.}
   TSSLType = (
     LT_all,
-    LT_SSLv2,
-    LT_SSLv3,
     LT_TLSv1,
     LT_TLSv1_1,
     LT_TLSv1_2,
